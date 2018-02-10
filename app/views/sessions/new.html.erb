@@ -1,0 +1,27 @@
+<div class="hold-transition">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="/dashboard"><b>IGP</b> Admin</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <%= form_tag sessions_path, class: 'form-signin', method: :post do %>
+        <div class='alert alert-warning'><i class='fa fa-flag'></i> For Administrators only!</div>
+        <p>Log in your credentials.</p>
+
+        <div class='form-group'>
+         <%= text_field_tag :username, nil, class: 'form-control', required: true, placeholder: 'Username' %>
+       </div>
+        <div class='form-group'>
+          <%= password_field_tag :password, nil, class: 'form-control', required: true, placeholder: 'password' %>
+        </div>
+         <%= submit_tag 'Sign in', class: "btn btn-lg btn-default btn-block", id: 'signin' %>
+     <% end %>
+    </div>
+    <!-- /.login-box-body -->
+  </div>
+<!-- /.login-box -->
+
+</div>

@@ -1,0 +1,14 @@
+Users(user_id, estab_id, name, username, password, role)
+Establishment(estab_id, estab_name, estab_type)
+Rooms(room_id, estab_id, room_name, room_type, room_number, room_price, status)
+Reservations(reservation_id, room_id, check_in, check_out, name)
+
+User has_many Establishments
+Rooms belongs_to Establishment
+Establishment has_many Rooms
+Reservation through :User, :Room
+
+assumptions:
+  - list all availbale rooms for each establishments
+  - roles(guest, front-desk, manger)
+  - monitor reservation activities

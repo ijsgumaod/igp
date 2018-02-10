@@ -3,12 +3,19 @@
   <head>
     <title>Igp</title>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', media: :all %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', media: :all%>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload', media: :all %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class='hold-transition skin-green-light login-page sidebar-mini fixed-layout'>
+    <div id='app'>
+      <%= yield %>
+    </div>
+    <%= javascript_pack_tag 'script_side', 'data-turbolinks-track': 'reload', media: :all %>
   </body>
+
 </html>
