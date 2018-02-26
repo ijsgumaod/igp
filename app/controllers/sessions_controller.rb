@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
     current_user.is_offline
     logout
     flash[:success] = 'Come back again!'
-    redirect_to log_in_path
+    redirect_to login_path
   end
 end

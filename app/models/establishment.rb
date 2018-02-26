@@ -1,4 +1,4 @@
 class Establishment < ApplicationRecord
   has_many :rooms
-  has_many :users
+  has_one :user, through: :reservations
 end

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'reservation/index'
-
   root to: 'dashboard#index'
 
   mount ActionCable.server => '/cable'
@@ -11,11 +9,13 @@ Rails.application.routes.draw do
       get 'online_users'
     end
   end
-  
-  resources :reservations
 
-  get '/log_in', to: 'sessions#new', as: :log_in
-  delete '/log_out', to: 'sessions#destroy', as: :log_out
+  #resources :reservations
+  get "/reservations/", to: 'reservations#index', as: :reservations
+  get '/reservations/reserve', to: 'reservations#new', as: :reserve
+
+  get '/login', to: 'sessions#new', as: :login
+  delete '/logout', to: 'sessions#destroy', as: :logout
 
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

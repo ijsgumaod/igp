@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   enum role: [:manager, :frontdesk]
   belongs_to :establishment
+  #has_many :establishment, through: :reservations
 
   after_initialize :set_default_role, :if => :new_record?
 

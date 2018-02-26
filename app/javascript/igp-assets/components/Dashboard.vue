@@ -1,39 +1,42 @@
 <template>
-  <section class="content container-fluid">
-    <section class="content-header">
-      <h1>
-        DASHBOARD
-        <small>IGP details</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><i class="fa fa-dashboard"></i> Dashboard</li>
-        <li class='active'>Details</li>
-      </ol>
-    </section>
-    <div class='box box-warning'>
-      <div class='panel-heading'>
-        <h4>Reports</h4>
+  <div class="container is-fluid">
+    <nav class="breadcrumb is-right is-small has-succeeds-separator" aria-label="breadcrumbs">
+      <div class="navbar-brand">
+        <p class="title">Dashboard</p>
       </div>
-      <div class='box-body'>
-        <charts></charts>
+      <ul>
+        <li><a href="#"><span class="icon is-small"><i class="fa fa-home"></i></span><span>Home</span></a></li>
+        <li class="is-active"><a href="#"><span class="icon is-small"><i class="fa fa-dashboard"></i></span><span>Dashboard</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <h4>Reports</h4>
+          <div class="content">
+            <charts></charts>
+          </div>
+        </article>
       </div>
     </div>
 
-    <div class='box box-success'>
-      <div class='panel-heading'>
-        <h4>Monitor</h4>
-      </div>
-      <div class='box-body'>
-        <rooms></rooms>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <h4>Rooms</h4>
+          <div class="content">
+            <rooms></rooms>
+          </div>
+        </article>
       </div>
     </div>
-  </section>
 
+  </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import Rooms from './Rooms.vue'
+import Rooms from '../components/Rooms.vue'
 import Charts from './Charts.vue'
 
 //Vue.component('rooms', Rooms);

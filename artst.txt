@@ -1,0 +1,7 @@
+
+  <collapse is-fullwidth>
+    <collapse-item title="Profile">
+      <div class=""></div>
+      <div class=""></div>
+    </collapse-item>
+  </collapse>

@@ -15,8 +15,7 @@ class DashboardController < ApplicationController
         format.json { render :json => @room }
       end
     else
-      redirect_to log_in_path
+      redirect_to login_path
     end
-
   end
 end

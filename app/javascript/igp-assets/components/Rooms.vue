@@ -1,129 +1,201 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <!-- Nav tabs -->
-      <div class="card">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#apartelle" aria-controls="apartelle" role="tab" data-toggle="tab"><span>Apartelle</span></a></li>
-          <li role="presentation"><a href="#balay-alumni" aria-controls="balay-alumni" role="tab" data-toggle="tab"><span>Balay Alumni</span></a></li>
-          <li role="presentation"><a href="#hostel" aria-controls="hostel" role="tab" data-toggle="tab"><span>Hostel</span></a></li>
-          <li role="presentation"><a href="#seafront-suite" aria-controls="seafront-suite" role="tab" data-toggle="tab"><span>Seafront Suite</span></a></li>
-        </ul>
+  <section>
+    <b-tabs position="is-centered" expanded class="block">
+      <b-tab-item label="Establishments Status">
+        <b-table :data="isEmpty ? [] : rooms" :striped="true" :hoverable="true" :focusable="true">
+          <template slot-scope="props">
+            <b-table-column  v-on:click.prevent="select" v-bind:id="props.row.room_id" field="room_status" label="Room Status" >
+              <span class='tag is-success' v-if="props.row.room_status == 3"> Vacant</span>
+              <span class='tag is-warning' v-else-if="props.row.room_status == 2"> Reserved</span>
+              <span class='tag is-danger' v-else> Occuppied</span>
+            </b-table-column>
+            <b-table-column field="room_number" label="Room No.">
+                {{ props.row.room_number }}
+            </b-table-column>
+            <b-table-column field="room_name" label="Room Name">
+                {{ props.row.room_name }}
+            </b-table-column>
+            <b-table-column field="room_type" label="Room Type">
+                {{ props.row.room_type }}
+            </b-table-column>
+            <b-table-column field="room_price" label="Room Price">
+                {{ props.row.room_price }}
+            </b-table-column>
+        </template>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="apartelle">
-            <table class='table table-responsive-sm table-hover table-striped'>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Room Status</th>
-                  <th scope="col">Room No.</th>
-                  <th scope="col">Room Name</th>
-                  <th scope="col">Room Type</th>
-                  <th scope="col">Room Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-justified" v-for="room in this.rooms" v-if="room.establishment_id == 1">
-                  <td>
-                    <small class='text-italic text-muted text-success' v-if="room.room_status == 3"> Vacant</small>
-                    <small class='text-italic text-muted text-warning' v-else-if="room.room_status == 2"> Reserved</small>
-                    <small class='text-italic text-muted text-danger' v-else> Occuppied</small>
-                  </td>
-                  <td>{{room.room_number}}</td>
-                  <td>{{room.room_name}}</td>
-                  <td>{{room.room_type}}</td>
-                  <td><small class='text-muted'>Php{{room.room_price}}</small></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="balay-alumni">
-            <table class='table table-striped'>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Room Status</th>
-                  <th scope="col">Room No.</th>
-                  <th scope="col">Room Name</th>
-                  <th scope="col">Room Type</th>
-                  <th scope="col">Room Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-justified" v-for="room in this.rooms" v-if="room.establishment_id == 2">
-                  <td>
-                    <small class='text-italic text-muted text-success' v-if="room.room_status == 3"> Vacant</small>
-                    <small class='text-italic text-muted text-warning' v-else-if="room.room_status == 2"> Reserved</small>
-                    <small class='text-italic text-muted text-danger' v-else> Occuppied</small>
-                  </td>
-                  <td>{{room.room_number}}</td>
-                  <td>{{room.room_name}}</td>
-                  <td>{{room.room_type}}</td>
-                  <td><small class='text-muted'>Php{{room.room_price}}</small></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="hostel">
-            <table class='table table-striped'>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Room Status</th>
-                  <th scope="col">Room No.</th>
-                  <th scope="col">Room Name</th>
-                  <th scope="col">Room Type</th>
-                  <th scope="col">Room Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-justified" v-for="room in this.rooms" v-if="room.establishment_id == 3">
-                  <td>
-                    <small class='text-italic text-muted text-success' v-if="room.room_status == 3"> Vacant</small>
-                    <small class='text-italic text-muted text-warning' v-else-if="room.room_status == 2"> Reserved</small>
-                    <small class='text-italic text-muted text-danger' v-else> Occuppied</small>
-                  </td>
-                  <td>{{room.room_number}}</td>
-                  <td>{{room.room_name}}</td>
-                  <td>{{room.room_type}}</td>
-                  <td><small class='text-muted'>Php{{room.room_price}}</small></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="seafront-suite">
-            <table class='table table-striped'>
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Room Status</th>
-                  <th scope="col">Room No.</th>
-                  <th scope="col">Room Name</th>
-                  <th scope="col">Room Type</th>
-                  <th scope="col">Room Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-justified" v-for="room in this.rooms" v-if="room.establishment_id == 4">
-                  <td>
-                    <small class='text-italic text-muted text-success' v-if="room.room_status == 3"> Vacant</small>
-                    <small class='text-italic text-muted text-warning' v-else-if="room.room_status == 2"> Reserved</small>
-                    <small class='text-italic text-muted text-danger' v-else> Occuppied</small>
-                  </td>
-                  <td>{{room.room_number}}</td>
-                  <td>{{room.room_name}}</td>
-                  <td>{{room.room_type}}</td>
-                  <td><small class='text-muted'>Php{{room.room_price}}</small></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <template slot="empty">
+            <section class="section">
+                <div class="content has-text-grey has-text-centered">
+                    <p>
+                        <b-icon
+                            icon="emoticon-sad"
+                            size="is-large">
+                        </b-icon>
+                    </p>
+                    <p>Nothing here.</p>
+                </div>
+              </section>
+          </template>
+        </b-table>
+    </b-tab-item>
+
+    <b-tab-item label="Apartelle">
+      <b-table :data="isEmpty ? [] : rooms" :striped="true" :hoverable="true" :focusable="true">
+        <template slot-scope="props" v-if="props.row.establishment_id == 1">
+          <b-table-column field="room_status" label="Room Status">
+            <span class='tag is-success' v-if="props.row.room_status == 3"> Vacant</span>
+            <span class='tag is-warning' v-else-if="props.row.room_status == 2"> Reserved</span>
+            <span class='tag is-danger' v-else> Occuppied</span>
+          </b-table-column>
+          <b-table-column field="room_number" label="Room No.">
+              {{ props.row.room_number }}
+          </b-table-column>
+          <b-table-column field="room_name" label="Room Name">
+              {{ props.row.room_name }}
+          </b-table-column>
+          <b-table-column field="room_type" label="Room Type">
+              {{ props.row.room_type }}
+          </b-table-column>
+          <b-table-column field="room_price" label="Room Price">
+              {{ props.row.room_price }}
+          </b-table-column>
+      </template>
+
+      <template slot="empty">
+          <section class="section">
+              <div class="content has-text-grey has-text-centered">
+                  <p>
+                      <b-icon
+                          icon="emoticon-sad"
+                          size="is-large">
+                      </b-icon>
+                  </p>
+                  <p>Nothing here.</p>
+              </div>
+            </section>
+        </template>
+      </b-table>
+      </b-tab-item>
+        <b-tab-item label="Balay Alumni">
+          <b-table :data="isEmpty ? [] : rooms" :striped="true" :hoverable="true" :focusable="true">
+            <template slot-scope="props" v-if="props.row.establishment_id == 2">
+              <b-table-column field="room_status" label="Room Status">
+                <span class='tag is-success' v-if="props.row.room_status == 3"> Vacant</span>
+                <span class='tag is-warning' v-else-if="props.row.room_status == 2"> Reserved</span>
+                <span class='tag is-danger' v-else> Occuppied</span>
+              </b-table-column>
+              <b-table-column field="room_number" label="Room No.">
+                  {{ props.row.room_number }}
+              </b-table-column>
+              <b-table-column field="room_name" label="Room Name">
+                  {{ props.row.room_name }}
+              </b-table-column>
+              <b-table-column field="room_type" label="Room Type">
+                  {{ props.row.room_type }}
+              </b-table-column>
+              <b-table-column field="room_price" label="Room Price">
+                  {{ props.row.room_price }}
+              </b-table-column>
+          </template>
+
+          <template slot="empty">
+              <section class="section">
+                  <div class="content has-text-grey has-text-centered">
+                      <p>
+                          <b-icon
+                              icon="emoticon-sad"
+                              size="is-large">
+                          </b-icon>
+                      </p>
+                      <p>Nothing here.</p>
+                  </div>
+                </section>
+            </template>
+          </b-table>
+        </b-tab-item>
+
+        <b-tab-item label="Hostel">
+          <b-table :data="isEmpty ? [] : rooms" :striped="true" :hoverable="true" :focusable="true">
+            <template slot-scope="props" v-if="props.row.establishment_id == 3">
+              <b-table-column field="room_status" label="Room Status">
+                <span class='tag is-success' v-if="props.row.room_status == 3"> Vacant</span>
+                <span class='tag is-warning' v-else-if="props.row.room_status == 2"> Reserved</span>
+                <span class='tag is-danger' v-else> Occuppied</span>
+              </b-table-column>
+              <b-table-column field="room_number" label="Room No.">
+                  {{ props.row.room_number }}
+              </b-table-column>
+              <b-table-column field="room_name" label="Room Name">
+                  {{ props.row.room_name }}
+              </b-table-column>
+              <b-table-column field="room_type" label="Room Type">
+                  {{ props.row.room_type }}
+              </b-table-column>
+              <b-table-column field="room_price" label="Room Price">
+                  {{ props.row.room_price }}
+              </b-table-column>
+          </template>
+
+          <template slot="empty">
+              <section class="section">
+                  <div class="content has-text-grey has-text-centered">
+                      <p>
+                          <b-icon
+                              icon="emoticon-sad"
+                              size="is-large">
+                          </b-icon>
+                      </p>
+                      <p>Nothing here.</p>
+                  </div>
+                </section>
+            </template>
+          </b-table>
+        </b-tab-item>
+
+        <b-tab-item label="Seafront Suite">
+          <b-table :data="isEmpty ? [] : rooms" :striped="true" :hoverable="true" :focusable="true">
+            <template slot-scope="props" v-if="props.row.establishment_id == 4">
+              <b-table-column field="room_status" label="Room Status">
+                <span class='tag is-success' v-if="props.row.room_status == 3"> Vacant</span>
+                <span class='tag is-warning' v-else-if="props.row.room_status == 2"> Reserved</span>
+                <span class='tag is-danger' v-else> Occuppied</span>
+              </b-table-column>
+              <b-table-column field="room_number" label="Room No.">
+                  {{ props.row.room_number }}
+              </b-table-column>
+              <b-table-column field="room_name" label="Room Name">
+                  {{ props.row.room_name }}
+              </b-table-column>
+              <b-table-column field="room_type" label="Room Type">
+                  {{ props.row.room_type }}
+              </b-table-column>
+              <b-table-column field="room_price" label="Room Price">
+                  {{ props.row.room_price }}
+              </b-table-column>
+          </template>
+
+          <template slot="empty">
+              <section class="section">
+                  <div class="content has-text-grey has-text-centered">
+                      <p>
+                          <b-icon
+                              icon="emoticon-sad"
+                              size="is-large">
+                          </b-icon>
+                      </p>
+                      <p>Nothing here.</p>
+                  </div>
+                </section>
+            </template>
+          </b-table>
+        </b-tab-item>
+    </b-tabs>
+</section>
+
 </template>
 
 <script>
-//import Vue from 'vue'
+import Vue from 'vue'
 import axios from 'axios'
 
 //Vue.component('monitor-component', {template: '#monitor-page'});
@@ -131,7 +203,13 @@ import axios from 'axios'
 export default{
   data(){
     return{
-      rooms:[]
+      rooms: [],
+      isEmpty: false
+    }
+  },
+  watch:{
+    establishment(value){
+      this.establishment_id = value
     }
   },
   mounted(){
@@ -141,7 +219,12 @@ export default{
             ro.rooms = response.data;
             //console.log(ro.rooms);
           })
-  }
+  },
+  methods: {
+    select: function(event){
+      alert(event.target);
+    }
+ }
 }
 </script>
 

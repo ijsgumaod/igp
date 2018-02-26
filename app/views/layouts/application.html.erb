@@ -11,9 +11,26 @@
 
   </head>
 
-  <body class='hold-transition skin-green-light login-page sidebar-mini fixed-layout'>
-    <div id='app'>
-      <%= yield %>
+  <body>
+    <% if logged_in? %>
+      <% props = {
+          user: current_user
+        }.to_json
+      %>
+    <% end %>
+    <div id="current-user" data="<%= props %>"></div>
+    <div id="app">
+      <div class="columns" style="margin-top:72px;">
+        <% if logged_in? %>
+          <navbar :user="user"></navbar>
+          <div class="column is-narrow">
+            <sidebar></sidebar>
+          </div>
+        <% end %>
+          <div class="column">
+              <%= yield %>
+          </div>
+      </div>
     </div>
     <%= javascript_pack_tag 'script_side', 'data-turbolinks-track': 'reload', media: :all %>
   </body>
