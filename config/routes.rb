@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :dashboard do
+  resources :dashboard, only: [:index] do
     collection do
       get 'online_users'
     end

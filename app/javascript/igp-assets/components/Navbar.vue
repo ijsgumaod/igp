@@ -11,13 +11,13 @@
           <div class="navbar-end">
                <b-dropdown hoverable position="is-bottom-left">
                   <a class="navbar-item" slot="trigger">
-                      <b-icon icon="user"></b-icon>
-                      <span>{{ user.props.user.name }}</span>
-                      <b-icon icon="angle-down"></b-icon>
+                    <b-icon icon="user"></b-icon>
+                      <span>{{user.name}}</span>
+                    <b-icon icon="angle-down"></b-icon>
                   </a>
 
                   <b-dropdown-item subheader>
-                      Logged as <b>{{ user.props.user.username}}</b>
+                      Logged as <b>{{ user.username }}</b>
                   </b-dropdown-item>
                   <b-dropdown-item separator />
                   <b-dropdown-item has-link>

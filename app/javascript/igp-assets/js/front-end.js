@@ -1,6 +1,7 @@
 //node_modules
 import Vue from 'vue/dist/vue'
-//import TurbolinksAdapter from 'vue-turbolinks';
+import TurbolinksAdapter from 'vue-turbolinks'
+import VueResource from 'vue-resource'
 import Buefy from 'buefy/src'
 //import Home from '../components/Home.vue';
 
@@ -15,10 +16,41 @@ Vue.use(Buefy, {
   defaultIconPack: 'fa'
 })
 
-document.addEventListener('turbolinks:load', () => {
+Vue.use(VueResource)
 
-  const user = document.getElementById("current-user")
-  const props = JSON.parse(user.getAttribute('data'))
+document.addEventListener('turbolinks:load', () => {
+  Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  //app content
+  var body_app = document.getElementById('app')
+
+  if (body_app != null){
+    var app = new Vue({
+       el: body_app,
+       components:{
+         sidebar: Sidebar,
+         navbar: Navbar,
+         dashboard: Dashboard,
+         reservations: Reservations,
+         reserve: Reserve
+       },
+       methods:{
+
+       }
+     })
+   }
+
+  //users content_tag
+  var user = document.getElementById("current-user")
+
+  if (user != null) {
+    var props = JSON.parse(user.getAttribute('data'))
+    console.log(props)
+  }
+  //reserve-form content_tag
+  var _formReserve = document.getElementById('reserve-form')
+  if (_formReserve != null){
+
+  }
 
   var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
@@ -39,31 +71,5 @@ document.addEventListener('turbolinks:load', () => {
 
       });
     });
-  }
-
-  if (props != null) {
-    console.log(props)
-
-    new Vue({
-       el: '#app',
-       props:{
-         user:{
-           default: function()
-           {
-             return {props}
-           }
-         }
-       },
-       components:{
-         sidebar: Sidebar,
-         navbar: Navbar,
-         dashboard: Dashboard,
-         reservations: Reservations,
-         reserve: Reserve
-       },
-       methods:{
-
-       },
-     })
   }
 })

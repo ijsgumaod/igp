@@ -1,4 +1,12 @@
-<reserve></reserve>
+<% prop = {name:current_user, username:current_user.username, user_id:current_user.id}.to_json %>
+<reserve v-once :user="<%= prop %>" ></reserve>
+<%= content_tag :div,
+  id="reserve-form",
+  data:{
+
+  } do %>
+<% end %>
+
 <footer class="footer">
     <div class="pull-right hidden-xs">
       <i class='fa fa-facebook'></i>

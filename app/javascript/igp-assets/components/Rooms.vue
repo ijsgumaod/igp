@@ -190,8 +190,7 @@
           </b-table>
         </b-tab-item>
     </b-tabs>
-</section>
-
+  </section>
 </template>
 
 <script>
