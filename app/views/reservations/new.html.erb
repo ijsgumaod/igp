@@ -1,11 +1,5 @@
-<% prop = {name:current_user, username:current_user.username, user_id:current_user.id}.to_json %>
+<% prop = {user_id:current_user.id, name:current_user.name, username:current_user.username, role:current_user.role, estab_name:Establishment.find(current_user.establishment_id).estab_name}.to_json %>
 <reserve v-once :user="<%= prop %>" ></reserve>
-<%= content_tag :div,
-  id="reserve-form",
-  data:{
-
-  } do %>
-<% end %>
 
 <footer class="footer">
     <div class="pull-right hidden-xs">
