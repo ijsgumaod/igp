@@ -40,7 +40,22 @@ ActiveRecord::Schema.define(version: 20180307035614) do
     t.integer "room_status"
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type '' for column 'online'
+  create_table "users", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "name"
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "role"
+    t.datetime "last_login_at"
+    t.datetime "last_logout_at"
+    t.datetime "last_activity_at"
+    t.string "last_login_from_ip_address"
+    t.boolean "online", default: false
+    t.integer "establishment_id"
+    t.index ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at"
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
 
 end
